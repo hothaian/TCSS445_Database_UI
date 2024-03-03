@@ -12,6 +12,7 @@ import AddItem from './pages/AddItem';
 import PendingOrder from './components/table/PendingOrder';
 import Investigate from './components/table/ClothingTable';
 import Investigation from './components/table/Investigate';
+import ReviewFromItem from './components/table/Review';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path="/sale" element={<Sale />} />
           <Route path="/pending-order" element={<PendingOrder />} />
           <Route path="/report-order" element={<Investigation />} />
+          <Route path="/review" element={<ReviewFromItem />} />
 
         </Routes>
       </div>

@@ -1,57 +1,57 @@
 import React, { useState } from 'react';
-import { Box, Button, TextField, Typography, useTheme} from '@mui/material';
-import { tokens } from "../../theme";
+import { Box, Button, TextField, Typography, useTheme } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import axios from 'axios';
+import { tokens } from "../../theme";
 
-const Investigation = () => {
-  const [reportId, setReportId] = useState('');
-  const [reportData, setReportData] = useState([]);
+
+const ReviewFormItem = () => {
+  const [itemId, setItemId] = useState('');
+  const [reviews, setReviews] = useState([]);
   const [error, setError] = useState(null);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const handleChange = (e) => {
-    setReportId(e.target.value);
+    setItemId(e.target.value);
   };
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/api/analytical/investigate/${reportId}`);
-      setReportData(response.data);
+      const response = await axios.get(`http://localhost:8080/api/scenarios/review/${itemId}`);
+      setReviews(response.data);
       setError(null);
     } catch (error) {
-      setError('Error fetching report data. Please try again.');
+      setError('Error fetching reviews. Please try again.');
     }
   };
 
   const columns = [
-    { field: 'item_id', headerName: 'Item ID', flex: 0.25 },
-    { field: 'seller_id', headerName: 'Seller ID', flex: 0.25 },
-    { field: 'price', headerName: 'Price', flex: 0.5 },
-    { field: 'description', headerName: 'Description', flex: 0.5 },
-    { field: 'review_id', headerName: 'Review ID', flex: 1 },
-    { field: 'review_text', headerName: 'Review Text', flex: 3 },
-    { field: 'order_status', headerName: 'Order Status', flex: 1 },
+    { field: 'review_id', headerName: 'Review ID', flex: 0.5 },
+    { field: 'user_id', headerName: 'User ID', flex: 0.5 },
+    { field: 'item_id', headerName: 'Item ID', flex: 0.5 },
+    { field: 'text', headerName: 'Review Text', flex: 4 },
+    { field: 'date_posted', headerName: 'Date Posted', flex: 1 },
   ];
 
   return (
     <Box m="20px">
-      <Typography variant="h3" color="white">Investigate The Seller by Report</Typography>
+      <Typography variant="h3">Reviews for Item</Typography>
       <Box display="flex" alignItems="center" mt={2}>
         <TextField
-          label="Report ID"
+          label="Item ID"
           variant="outlined"
-          value={reportId}
+          value={itemId}
           onChange={handleChange}
           fullWidth
-          style={{ marginRight: '1rem', color: 'white' }}
+          style={{ marginRight: '1rem' }}
         />
         <Button variant="contained" color="primary" onClick={handleSubmit}>
-          Get Report
+          Get Reviews
         </Button>
       </Box>
       {error && <Typography color="error" style={{ marginTop: '1rem' }}>{error}</Typography>}
-      <Box m="40px 0 0 0"
+      <Box 
+            m="40px 0 0 0"
             height="75vh"
             sx={{
               "& .MuiDataGrid-root": {
@@ -79,7 +79,7 @@ const Investigation = () => {
               },
             }}>
         <DataGrid
-          rows={reportData}
+          rows={reviews}
           columns={columns}
           pageSize={5}
           autoHeight
@@ -94,4 +94,4 @@ const Investigation = () => {
   );
 };
 
-export default Investigation;
+export default ReviewFormItem;
