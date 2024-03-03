@@ -1,62 +1,57 @@
 import React, { useState } from 'react';
-import { Box, Button, TextField, Typography, useTheme } from '@mui/material';
-
+import { Box, Button, TextField, Typography, useTheme} from '@mui/material';
+import { tokens } from "../../theme";
 import { DataGrid } from '@mui/x-data-grid';
 import axios from 'axios';
-import { tokens } from "../../theme";
 
-const PendingOrder = () => {
-  const [sellerId, setSellerId] = useState('');
-  const [orders, setOrders] = useState([]);
+const Investigation = () => {
+  const [reportId, setReportId] = useState('');
+  const [reportData, setReportData] = useState([]);
   const [error, setError] = useState(null);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-
   const handleChange = (e) => {
-    setSellerId(e.target.value);
+    setReportId(e.target.value);
   };
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/api/analytical/pendingOrder/${sellerId}`);
-      setOrders(response.data);
+      const response = await axios.get(`http://localhost:8080/api/analytical/investigate/${reportId}`);
+      setReportData(response.data);
       setError(null);
     } catch (error) {
-      setError('Error fetching orders. Please try again.');
+      setError('Error fetching report data. Please try again.');
     }
   };
 
   const columns = [
-    { field: 'order_id', headerName: 'Order ID', flex: 1 },
-    { field: 'buyer_id', headerName: 'Buyer ID', flex: 1 },
-    { field: 'item_id', headerName: 'Item ID', flex: 1 },
-    { field: 'buyer_username', headerName: 'Buyer Username', flex: 1 },
-    { field: 'buyer_email', headerName: 'Buyer Email', flex: 1 },
-    { field: 'address_line1', headerName: 'Address Line 1', flex: 1 },
-    { field: 'city', headerName: 'City', flex: 1 },
-    { field: 'state', headerName: 'State', flex: 1 },
-    { field: 'zip_code', headerName: 'Zip Code', flex: 1 },
+    { field: 'item_id', headerName: 'Item ID', flex: 0.25 },
+    { field: 'seller_id', headerName: 'Seller ID', flex: 0.25 },
+    { field: 'price', headerName: 'Price', flex: 0.5 },
+    { field: 'description', headerName: 'Description', flex: 0.5 },
+    { field: 'review_id', headerName: 'Review ID', flex: 1 },
+    { field: 'review_text', headerName: 'Review Text', flex: 3 },
+    { field: 'order_status', headerName: 'Order Status', flex: 1 },
   ];
 
   return (
     <Box m="20px">
-      <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Typography variant="h3" color="white">Pending Orders</Typography>
+      <Typography variant="h3" color="white">Investigation</Typography>
+      <Box display="flex" alignItems="center" mt={2}>
+        <TextField
+          label="Report ID"
+          variant="outlined"
+          value={reportId}
+          onChange={handleChange}
+          fullWidth
+          style={{ marginRight: '1rem', color: 'white' }}
+        />
         <Button variant="contained" color="primary" onClick={handleSubmit}>
-          Get Orders
+          Get Report
         </Button>
       </Box>
-      <TextField
-        label="Seller ID"
-        variant="outlined"
-        value={sellerId}
-        onChange={handleChange}
-        fullWidth
-        style={{ marginTop: '1rem', color: 'white' }}
-      />
       {error && <Typography color="error" style={{ marginTop: '1rem' }}>{error}</Typography>}
-      <Box 
-            m="40px 0 0 0"
+      <Box m="40px 0 0 0"
             height="75vh"
             sx={{
               "& .MuiDataGrid-root": {
@@ -82,18 +77,21 @@ const PendingOrder = () => {
               "& .MuiCheckbox-root": {
                 color: `${colors.greenAccent[200]} !important`,
               },
-            }}
-      >
-
+            }}>
         <DataGrid
-          rows={orders}
+          rows={reportData}
           columns={columns}
           pageSize={5}
-          getRowId={(row) => row.order_id}
+          autoHeight
+          disableColumnFilter
+          disableColumnMenu
+          disableSelectionOnClick
+          disableDensitySelector
+          getRowId={(row) => row.review_id}
         />
       </Box>
     </Box>
   );
 };
 
-export default PendingOrder;
+export default Investigation;

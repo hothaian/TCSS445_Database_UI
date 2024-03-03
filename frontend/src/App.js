@@ -10,6 +10,8 @@ import './App.css';
 import EditUser from './pages/EditForm';
 import AddItem from './pages/AddItem';
 import PendingOrder from './components/table/PendingOrder';
+import Investigate from './components/table/ClothingTable';
+import Investigation from './components/table/Investigate';
 
 
 function App() {
@@ -26,7 +28,7 @@ function App() {
           <Route path="/edit-user" element={<EditUser />} />
           <Route path="/sale" element={<Sale />} />
           <Route path="/pending-order" element={<PendingOrder />} />
-          <Route path="/report-order" element={<PendingOrder />} />
+          <Route path="/report-order" element={<Investigation />} />
 
         </Routes>
       </div>
