@@ -11,5 +11,6 @@ module.exports = app => {
 
 
 
+
     app.use('/api/analytical', router);
 };
