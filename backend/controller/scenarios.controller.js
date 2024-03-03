@@ -13,7 +13,7 @@ exports.findUserByUsernameAndPassword = (req, res) => {
     if (results.length > 0) {
       res.json({ message: "User found", user: results[0] });
     } else {
-      res.status(404).json({ message: "User not found" });
+      res.status(403).json({ message: "User not found" });
     }
   });
 };

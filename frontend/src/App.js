@@ -9,6 +9,7 @@ import Sale from './pages/Sale';
 import './App.css';
 import EditUser from './pages/EditForm';
 import AddItem from './pages/AddItem';
+import PendingOrder from './components/table/PendingOrder';
 
 
 function App() {
@@ -24,6 +25,9 @@ function App() {
           <Route path="/add-item" element={<AddItem />} />
           <Route path="/edit-user" element={<EditUser />} />
           <Route path="/sale" element={<Sale />} />
+          <Route path="/pending-order" element={<PendingOrder />} />
+          <Route path="/report-order" element={<PendingOrder />} />
+
         </Routes>
       </div>
     </Router>

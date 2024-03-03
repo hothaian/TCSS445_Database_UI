@@ -173,7 +173,7 @@ function showNotification(message) {
               <TextField
                 fullWidth
                 variant="filled"
-                type="text"
+                type="date"
                 label="Date of Birth YYYY-MM-DD"
                 onBlur={handleBlur}
                 onChange={handleChange}

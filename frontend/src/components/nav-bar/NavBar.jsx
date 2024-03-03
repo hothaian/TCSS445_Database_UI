@@ -59,6 +59,12 @@ const NavBar = ({ dark, setMode }) => {
                   Sale
                 </Link>
               </li>
+              <li>
+                <Link to='/pending-order' className='navIcon'>
+                  <AttachMoneyIcon className='navIcon active' />
+                  Pending Order
+                </Link>
+              </li>
              
             </ul>
             <button className='toggle' onClick={() => setMobile(!Mobile)}>
