@@ -119,3 +119,19 @@ exports.deleteAll = (req, res) => {
     else res.send({ message: `All Users were deleted successfully!` });
   });
 };
+
+/**
+ * 
+ * @author: An Ho
+ */
+// Delete all Users from the database.
+exports.getUserName = (req, res) => {
+  User.removeAll((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while removing all users."
+      });
+    else res.send({ message: `All Users were deleted successfully!` });
+  });
+};
