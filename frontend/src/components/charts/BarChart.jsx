@@ -107,7 +107,7 @@ const BarChart = () => {
       indexBy="item_id"
       margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
       padding={0.3}
-      groupMode="stack"
+      groupMode="group"
       valueScale={{
         type: 'linear',   // Left axis (Total Like)
         min: 0,
