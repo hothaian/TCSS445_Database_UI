@@ -41,3 +41,46 @@ exports.getPenddingOrderForASeller = (req, res) => {
       res.json(results);
     });
   };
+exports.investigateASeller = (req, res) => {
+    // Extract the seller_id from the request parameters
+    const reportId = req.params.reportId;
+
+      // Check if reportId is provided
+      if (!reportId) {
+        res.status(400).json({ error: 'reportId parameter is required' });
+        return;
+      }
+
+      // Define the SQL query
+      const query = `
+        SELECT DISTINCT
+            CI.item_id,
+            CI.user_id AS seller_id,
+            CI.price,
+            CI.description,
+            R.review_id,
+            R.text AS review_text,
+            O.status AS order_status
+        FROM 
+            phu_tin_and_ho_an.Report RP
+        INNER JOIN 
+            phu_tin_and_ho_an.ClothingItem CI ON RP.reported_user_id = CI.user_id
+        LEFT JOIN 
+            phu_tin_and_ho_an.Review R ON CI.item_id = R.item_id
+        LEFT JOIN 
+            phu_tin_and_ho_an.Order O ON CI.item_id = O.item_id
+        WHERE 
+            RP.report_id = ?;
+      `;
+
+      // Execute the query
+      sql.query(query, [reportId], (err, results) => {
+        if (err) {
+          console.error('Error executing analytical query:', err);
+          res.status(500).json({ error: 'Error executing analytical query' });
+          return;
+        }
+
+        res.json(results);
+      });
+  };

@@ -13,10 +13,11 @@ exports.findUserByUsernameAndPassword = (req, res) => {
     if (results.length > 0) {
       res.json({ message: "User found", user: results[0] });
     } else {
-      res.status(404).json({ message: "User not found" });
+      res.status(403).json({ message: "User not found" });
     }
   });
 };
+<<<<<<< HEAD
 
 exports.showTopLikedAndOrderedItems = (req, res) => {
   const query = `
@@ -72,3 +73,34 @@ exports.showTopLikedAndOrderedItems = (req, res) => {
     }
   });
 };
+=======
+exports.getReviewsbyItemID = (req, res) => {
+  // Extract the item_id from the request parameters
+  const itemId = req.params.itemId;
+
+  // Check if itemId is provided
+  if (!itemId) {
+    res.status(400).json({ error: 'itemId parameter is required' });
+    return;
+  }
+
+  // Define the SQL query
+  const query = `
+    SELECT *
+    FROM phu_tin_and_ho_an.Review
+    WHERE item_id = ?;
+  `;
+
+  // Execute the query
+  sql.query(query, [itemId], (err, results) => {
+    if (err) {
+      console.error('Error executing review query:', err);
+      res.status(500).json({ error: 'Error executing review query' });
+      return;
+    }
+
+    // Send the results back as JSON
+    res.json(results);
+  });
+};
+>>>>>>> 2fd57f3ea2d8103535c401d0bd4b4b324b40b1c1
