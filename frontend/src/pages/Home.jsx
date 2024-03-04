@@ -1,7 +1,9 @@
 import React from "react"
 import Cards from "../components/cards/Cards"
-import Charts from "../components/charts/Charts"
+
 import UpdateClothingItem from "../components/update/UpdateClothingItem";
+import BarChartItem from "../components/charts/BarChartItem";
+import BarChart from "../components/charts/BarChart";
 
 
 const Home = () => {
@@ -13,9 +15,10 @@ const Home = () => {
             <h3>DashBoard</h3>
             <span>Admin</span>
           </div>
-          <Cards />
-          <Charts />
-          <UpdateClothingItem/>
+          {/* <Cards /> */}
+          <BarChart/>
+          {/* <BarChartItem/> */}
+          
        
 
 

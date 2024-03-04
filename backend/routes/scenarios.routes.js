@@ -5,6 +5,7 @@ module.exports = app => {
   
     // Route to handle analytical queries
     router.get("/login", scenarios.findUserByUsernameAndPassword);
+    router.get("/item-like-order",scenarios.showTopLikedAndOrderedItems);
   
     app.use('/api/scenarios', router);
 };
