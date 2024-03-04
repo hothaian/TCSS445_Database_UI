@@ -42,7 +42,7 @@ const PendingOrder = () => {
     <Box m="20px">
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Typography variant="h3" color="white">Pending Orders</Typography>
-        <Button className="button" variant="contained "  onClick={handleSubmit}>
+        <Button variant="contained" color="primary" onClick={handleSubmit}>
           Get Orders
         </Button>
       </Box>

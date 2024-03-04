@@ -740,3 +740,5 @@ backend/node_modules/sqlstring/LICENSE
 backend/node_modules/sqlstring/package.json
 backend/node_modules/sqlstring/README.md
 backend/node_modules/sqlstring/lib/SqlString.js
+backend/config/db.config.js
+backend/config/db.config.js
