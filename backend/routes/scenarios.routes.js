@@ -4,7 +4,7 @@ module.exports = app => {
     var router = require("express").Router();
   
     // Route to handle analytical queries
-    router.get("/login", scenarios.findUserByUsernameAndPassword);
+    router.post("/login", scenarios.findUserByUsernameAndPassword);
     router.get("/review/:itemId", scenarios.getReviewsbyItemID);
 
     app.use('/api/scenarios', router);

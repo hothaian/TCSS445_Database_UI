@@ -21,22 +21,22 @@ const LoginButton = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/scenarios/login', {
+      const response = await fetch('http://localhost:8080/api/scenarios/login', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           // Include any other necessary headers for authentication
         },
-        data: {  // This is the payload for a GET request (not standard, use with caution)
+        body: JSON.stringify({  // Using body instead of data
           username: username,
           password: password,
-        },
-        
+        }),
       });
       console.log("🚀 ~ handleLogin ~ response:", response)
      
   
       // Check the response status and message
-      if (response.status === 200 && response.data.message === 'User found') {
+      if (response.ok) {
         // User found, proceed with the login
         loginUser(username, password);
         handleClose();
