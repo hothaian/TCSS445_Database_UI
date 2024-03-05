@@ -83,7 +83,7 @@ const BarChartOrder = () => {
   return (
     <div className="cardBox">
       <Box>
-        <Header title="Order Report " subtitle="Show analytical on Orders " />
+        <Header title="Buyer Report " subtitle="Show analytical on Buyers " />
         <Bar data={chartData} options={options} />
       </Box>
     </div>
