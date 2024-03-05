@@ -24,7 +24,9 @@ export const API_ROUTES = {
 
 
   //speciif
-  getItemLikeOrder: `${API_BASE_URL}/api/scenarios/item-like-order`,
+  getMostLikedAndOrderedItem: `${API_BASE_URL}/api/analytical/item-with-most-like-order`,
+
+
   // Specific route for fetching pending orders for a seller
   getPendingOrdersForSeller: (sellerId) => `${API_BASE_URL}/api/pendingOrder/${sellerId}`,
 };
