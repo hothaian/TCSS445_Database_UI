@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import "./NavBar.css"
-import Head from "../head/Head"
+
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined"
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import InventoryIcon from '@mui/icons-material/Inventory';
@@ -10,7 +10,8 @@ import MenuIcon from "@mui/icons-material/Menu"
 import CloseIcon from "@mui/icons-material/Close"
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { Link } from "react-router-dom";
-
+import ReviewsIcon from '@mui/icons-material/Reviews';
+import PendingIcon from '@mui/icons-material/Pending';
 
 const NavBar = ({ dark, setMode }) => {
   // Toogle Menu
@@ -18,7 +19,7 @@ const NavBar = ({ dark, setMode }) => {
   return (
     <>
       <section className='header'>
-        <Head dark={dark} setMode={setMode} />
+       
         <header>
           <div className='container'>
             {/*<ul className='navMenu'>*/}
@@ -53,27 +54,17 @@ const NavBar = ({ dark, setMode }) => {
                   Add Item
                 </Link>
               </li>
-              <li>
-                <Link to='/sale' className='navIcon'>
-                  <AttachMoneyIcon className='navIcon active' />
-                  Sale
-                </Link>
-              </li>
+
               <li>
                 <Link to='/pending-order' className='navIcon'>
-                  <AttachMoneyIcon className='navIcon active' />
+                  <PendingIcon className='navIcon active' />
                   Pending Order
                 </Link>
               </li>
-              <li>
-                <Link to='/report-order' className='navIcon'>
-                  <AttachMoneyIcon className='navIcon active' />
-                  Report
-                </Link>
-              </li>
+    
               <li>
                 <Link to='/review' className='navIcon'>
-                  <AttachMoneyIcon className='navIcon active' />
+                  <ReviewsIcon className='navIcon active' />
                   Review
                 </Link>
               </li>

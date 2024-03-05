@@ -1,8 +1,10 @@
 import React from "react"
-import Cards from "../components/cards/Cards"
-import Charts from "../components/charts/Charts"
-import UpdateClothingItem from "../components/update/UpdateClothingItem";
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 
+import BarChartTag from "../components/charts/BarChartTag";
+import BarChartItem from "../components/charts/BarChartItem";
+import BarChartOrder from "../components/charts/BarChartOrder";
 
 const Home = () => {
   return (
@@ -10,19 +12,23 @@ const Home = () => {
       <section className='home'>
         <div className='container'>
           <div className='heading flexSB'>
-            <h3>DashBoard</h3>
-            <span>Admin</span>
+            <Typography variant="h5" color="white">Admin Dashboard</Typography>
+
           </div>
-          <Cards />
-          <Charts />
-          <UpdateClothingItem/>
-       
-
-
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <BarChartOrder />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <BarChartItem />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <BarChartTag />
+            </Grid>
+          </Grid>
         </div>
       </section>
     </>
-  )
-}
-
+  );
+};
 export default Home

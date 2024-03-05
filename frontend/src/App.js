@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavBar from './components/nav-bar/NavBar';
 import Home from './pages/Home';
 import User from './pages/User';
@@ -10,15 +10,20 @@ import './App.css';
 import EditUser from './pages/EditForm';
 import AddItem from './pages/AddItem';
 import PendingOrder from './components/table/PendingOrder';
-import Investigate from './components/table/ClothingTable';
-import Investigation from './components/table/Investigate';
+import { UserProvider } from './context/UserContext';
 import ReviewFromItem from './components/table/Review';
-
+import Head from './components/head/Head';
 
 function App() {
+
+
+
   return (
+    <UserProvider>
+      <Head/>
     <Router>
-      <div className="App">
+      <div className='App'>
+        
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -29,12 +34,13 @@ function App() {
           <Route path="/edit-user" element={<EditUser />} />
           <Route path="/sale" element={<Sale />} />
           <Route path="/pending-order" element={<PendingOrder />} />
-          <Route path="/report-order" element={<Investigation />} />
+        
           <Route path="/review" element={<ReviewFromItem />} />
-
         </Routes>
       </div>
     </Router>
+    </UserProvider>
+
   );
 }
 

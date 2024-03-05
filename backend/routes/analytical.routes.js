@@ -8,9 +8,10 @@ module.exports = app => {
     router.get("/pendingOrder/:sellerId", analyticalController.getPenddingOrderForASeller);
     
     router.get("/investigate/:reportId", analyticalController.investigateASeller);
+    router.get('/popular-tag', analyticalController.showPopularTag);
 
-
-
+    router.get('/top-buyers', analyticalController.topBuyersByTotalSpent);
+    router.get('/item-with-most-like-order', analyticalController.showMostLikedAndOrderedItem);
 
     app.use('/api/analytical', router);
 };

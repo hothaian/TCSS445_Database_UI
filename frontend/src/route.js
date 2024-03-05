@@ -22,6 +22,12 @@ export const API_ROUTES = {
   deleteUser: (userId) => `${API_BASE_URL}/api/users/${userId}`,
   deleteAllUsers: `${API_BASE_URL}/api/users`,
 
+
+  //speciif
+  getMostLikedAndOrderedItem: `${API_BASE_URL}/api/analytical/item-with-most-like-order`,
+  getTopBuyersByTotalSpent: `${API_BASE_URL}/api/analytical/top-buyers`,
+
+
   // Specific route for fetching pending orders for a seller
   getPendingOrdersForSeller: (sellerId) => `${API_BASE_URL}/api/pendingOrder/${sellerId}`,
 };
