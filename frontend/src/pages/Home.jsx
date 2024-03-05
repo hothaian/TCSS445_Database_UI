@@ -1,6 +1,7 @@
 import React from "react"
 import BarChartTag from "../components/charts/BarChartTag";
 import BarChartItem from "../components/charts/BarChartItem";
+import BarChartOrder from "../components/charts/BarChartOrder";
 
 
 const Home = () => {
@@ -13,6 +14,7 @@ const Home = () => {
             <span>Admin</span>
           </div>
           {/* <Cards /> */}
+          <BarChartOrder/>
           <BarChartItem/>
           <BarChartTag/>
           

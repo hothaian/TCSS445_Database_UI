@@ -178,3 +178,40 @@ exports.investigateASeller = (req, res) => {
     });
   };
   
+
+  exports.topBuyersByTotalSpent = (req, res) => {
+    const query = `
+      SELECT
+          order_table.buyer_id,
+          SUM(payment.amount) AS total_spent
+      FROM
+          phu_tin_and_ho_an.payment
+      JOIN
+          phu_tin_and_ho_an.\`order\` AS order_table ON payment.order_id = order_table.order_id
+      GROUP BY
+          order_table.buyer_id
+      ORDER BY
+          total_spent DESC
+      LIMIT 10;
+    `;
+  
+    sql.query(query, (err, results) => {
+      if (err) {
+        console.error("Error executing SQL query:", err);
+        res.status(500).json({ message: "Error executing SQL query" });
+        return;
+      }
+  
+      if (results.length > 0) {
+        const topBuyers = results.map((result) => ({
+          buyer_id: result.buyer_id,
+          total_spent: result.total_spent,
+        }));
+  
+        res.json({ message: "Top buyers by total spent", topBuyers });
+      } else {
+        res.status(404).json({ message: "No data found" });
+      }
+    });
+  };
+  
