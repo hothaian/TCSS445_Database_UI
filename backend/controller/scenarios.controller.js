@@ -46,3 +46,29 @@ exports.getReviewsbyItemID = (req, res) => {
     res.json(results);
   });
 };
+
+
+exports.getReviews = (req, res) => {
+
+
+
+
+  // Define the SQL query
+  const query = `
+    SELECT *
+    FROM phu_tin_and_ho_an.Review;
+    
+  `;
+
+  // Execute the query
+  sql.query(query, (err, results) => {
+    if (err) {
+      console.error('Error executing review query:', err);
+      res.status(500).json({ error: 'Error executing review query' });
+      return;
+    }
+
+    // Send the results back as JSON
+    res.json(results);
+  });
+};

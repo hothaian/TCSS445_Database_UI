@@ -9,6 +9,8 @@ const ReviewFormItem = () => {
   const [itemId, setItemId] = useState("");
   const [reviews, setReviews] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const handleChange = (e) => {
@@ -24,6 +26,23 @@ const ReviewFormItem = () => {
       setError(null);
     } catch (error) {
       setError("Error fetching reviews. Please try again.");
+    }
+  };
+  
+  const handleShowAll = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get(
+        "http://localhost:8080/api/scenarios/review"
+      );
+      setReviews(response.data);
+      setError(null);
+    } catch (error) {
+      setError(
+        `Error fetching all orders: ${error.message}. Please try again.`
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -42,9 +61,24 @@ const ReviewFormItem = () => {
           title="Get Reviews from Item"
           subtitle="write some thing here ..."
         />
-        <Button variant="contained" color="primary" onClick={handleSubmit}>
-          Get Reviews
-        </Button>
+        <Box display="flex" justifyContent="space-between" alignItems="center">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleSubmit}
+            disabled={loading}
+          >
+            {loading ? "Getting Reviews..." : "Get Reviews"}
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={handleShowAll}
+            disabled={loading}
+          >
+            {loading ? "Fetching All..." : "Show All"}
+          </Button>
+        </Box>
       </Box>
       <TextField
         label="Item Id"
