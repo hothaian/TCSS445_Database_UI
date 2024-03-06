@@ -85,6 +85,40 @@ exports.investigateASeller = (req, res) => {
     res.json(results);
   });
 };
+exports.getAllReportedSellers = (req, res) => {
+  // Define the SQL query
+  const query = `
+  SELECT
+  DISTINCT CI.user_id AS seller_id,
+  CI.item_id,
+  CI.price,
+  CI.description,
+  R.review_id,
+  R.text AS review_text,
+  O.status AS order_status
+FROM 
+  phu_tin_and_ho_an.Report RP
+INNER JOIN 
+  phu_tin_and_ho_an.ClothingItem CI ON RP.reported_user_id = CI.user_id
+LEFT JOIN 
+  phu_tin_and_ho_an.Review R ON CI.item_id = R.item_id
+LEFT JOIN 
+  phu_tin_and_ho_an.Order O ON CI.item_id = O.item_id;
+
+        
+      `;
+
+  // Execute the query
+  sql.query(query, (err, results) => {
+    if (err) {
+      console.error("Error executing analytical query:", err);
+      res.status(500).json({ error: "Error executing analytical query" });
+      return;
+    }
+
+    res.json(results);
+  });
+};
 
 exports.showMostLikedAndOrderedItem = (req, res) => {
   const query = `

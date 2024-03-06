@@ -8,8 +8,11 @@ const Investigation = () => {
   const [reportId, setReportId] = useState('');
   const [reportData, setReportData] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
   const handleChange = (e) => {
     setReportId(e.target.value);
   };
@@ -24,9 +27,26 @@ const Investigation = () => {
     }
   };
 
+  const handleShowAll = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get(
+        "http://localhost:8080/api/analytical/reported-sellers"
+      );
+      setReportData(response.data);
+      setError(null);
+    } catch (error) {
+      setError(
+        `Error fetching all orders: ${error.message}. Please try again.`
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const columns = [
-    { field: 'item_id', headerName: 'Item ID', flex: 0.25 },
-    { field: 'seller_id', headerName: 'Seller ID', flex: 0.25 },
+    { field: 'seller_id', headerName: 'Seller ID', flex: 0.5 },
+    { field: 'item_id', headerName: 'Item ID', flex: 0.4 },  
     { field: 'price', headerName: 'Price', flex: 0.5 },
     { field: 'description', headerName: 'Description', flex: 0.5 },
     { field: 'review_id', headerName: 'Review ID', flex: 1 },
@@ -38,15 +58,30 @@ const Investigation = () => {
     <Box m="20px">
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header
-          title="Investigate Reports"
+          title="Reported Sellers List"
           subtitle="write some thing here ..."
         />
-        <Button variant="contained" color="primary" onClick={handleSubmit}>
-          Get Report
-        </Button>
+        <Box display="flex" justifyContent="space-between" alignItems="center">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleSubmit}
+            disabled={loading}
+          >
+            {loading ? "Getting Reports..." : "Get Reports"}
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={handleShowAll}
+            disabled={loading}
+          >
+            {loading ? "Fetching All..." : "Show All"}
+          </Button>
+        </Box>
       </Box>
       <TextField
-        label="Report ID"
+        label="Seller ID"
         variant="outlined"
         value={reportId}
         onChange={handleChange}

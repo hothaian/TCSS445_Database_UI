@@ -71,7 +71,7 @@ const NavBar = ({ dark, setMode }) => {
               <li>
                 <Link to='/report' className='navIcon'>
                   <ReportIcon className='navIcon active' />
-                  Investigate Report
+                  Reported Sellers
                 </Link>
               </li>
              
