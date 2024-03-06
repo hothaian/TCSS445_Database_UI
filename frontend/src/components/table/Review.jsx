@@ -39,7 +39,7 @@ const ReviewFormItem = () => {
     <Box m="20px">
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header
-          title="Get Review from Seller"
+          title="Get Reviews from Item"
           subtitle="write some thing here ..."
         />
         <Button variant="contained" color="primary" onClick={handleSubmit}>
@@ -47,7 +47,7 @@ const ReviewFormItem = () => {
         </Button>
       </Box>
       <TextField
-        label="Seller ID"
+        label="Item Id"
         variant="outlined"
         value={itemId}
         onChange={handleChange}

@@ -6,7 +6,8 @@ module.exports = app => {
     // Route to handle analytical queries
     // show list of pending order.
     router.get("/pendingOrder/:sellerId", analyticalController.getPenddingOrderForASeller);
-    
+    router.get("/pendingOrders/", analyticalController.getAllPendingOrders);
+
     router.get("/investigate/:reportId", analyticalController.investigateASeller);
     router.get('/popular-tag', analyticalController.showPopularTag);
 

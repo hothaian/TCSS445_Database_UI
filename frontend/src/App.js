@@ -13,6 +13,7 @@ import PendingOrder from './components/table/PendingOrder';
 import { UserProvider } from './context/UserContext';
 import ReviewFromItem from './components/table/Review';
 import Head from './components/head/Head';
+import Investigation from './components/table/Investigate';
 
 function App() {
 
@@ -34,7 +35,8 @@ function App() {
           <Route path="/edit-user" element={<EditUser />} />
           <Route path="/sale" element={<Sale />} />
           <Route path="/pending-order" element={<PendingOrder />} />
-        
+          <Route path="/report" element={<Investigation />} />
+
           <Route path="/review" element={<ReviewFromItem />} />
         </Routes>
       </div>

@@ -3,7 +3,7 @@ import { Box, Button, TextField, Typography, useTheme} from '@mui/material';
 import { tokens } from "../../theme";
 import { DataGrid } from '@mui/x-data-grid';
 import axios from 'axios';
-
+import Header from '../Header';
 const Investigation = () => {
   const [reportId, setReportId] = useState('');
   const [reportData, setReportData] = useState([]);
@@ -36,20 +36,29 @@ const Investigation = () => {
 
   return (
     <Box m="20px">
-      <Typography variant="h3" color="white">Investigate The Seller by Report</Typography>
-      <Box display="flex" alignItems="center" mt={2}>
-        <TextField
-          label="Report ID"
-          variant="outlined"
-          value={reportId}
-          onChange={handleChange}
-          fullWidth
-          style={{ marginRight: '1rem', color: 'white' }}
+      <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Header
+          title="Investigate Reports"
+          subtitle="write some thing here ..."
         />
         <Button variant="contained" color="primary" onClick={handleSubmit}>
           Get Report
         </Button>
       </Box>
+      <TextField
+        label="Report ID"
+        variant="outlined"
+        value={reportId}
+        onChange={handleChange}
+        fullWidth
+        InputLabelProps={{
+          style: { color: "white" },
+        }}
+        InputProps={{
+          style: { color: "white" },
+        }}
+        style={{ marginTop: "1rem" }}
+      />
       {error && <Typography color="error" style={{ marginTop: '1rem' }}>{error}</Typography>}
       <Box m="40px 0 0 0"
             height="75vh"

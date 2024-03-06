@@ -74,7 +74,7 @@ function showNotification(message) {
 
   return (
     <Box m="20px">
-      <Header title="CREATE USER" subtitle="Create a New User Profile" />
+      <Header title="Add User" subtitle="Create a New User Profile" />
 
       <Formik
         onSubmit={handleFormSubmit}
@@ -154,7 +154,7 @@ function showNotification(message) {
                 onChange={handleChange}
               >
                 <MenuItem value='male'>Male</MenuItem>
-                <MenuItem value='female' s>Famale</MenuItem>
+                <MenuItem value='female' s>Female</MenuItem>
                 <MenuItem value='not above'>Not Above</MenuItem>
               </Select>   
               <TextField

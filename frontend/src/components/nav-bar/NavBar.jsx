@@ -4,7 +4,7 @@ import "./NavBar.css"
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined"
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import InventoryIcon from '@mui/icons-material/Inventory';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import ReportIcon from '@mui/icons-material/Report';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import MenuIcon from "@mui/icons-material/Menu"
 import CloseIcon from "@mui/icons-material/Close"
@@ -66,6 +66,12 @@ const NavBar = ({ dark, setMode }) => {
                 <Link to='/review' className='navIcon'>
                   <ReviewsIcon className='navIcon active' />
                   Review
+                </Link>
+              </li>
+              <li>
+                <Link to='/report' className='navIcon'>
+                  <ReportIcon className='navIcon active' />
+                  Investigate Report
                 </Link>
               </li>
              

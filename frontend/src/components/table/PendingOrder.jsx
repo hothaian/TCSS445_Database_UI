@@ -9,6 +9,7 @@ const PendingOrder = () => {
   const [sellerId, setSellerId] = useState("");
   const [orders, setOrders] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -28,10 +29,28 @@ const PendingOrder = () => {
     }
   };
 
+  const handleShowAll = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get(
+        "http://localhost:8080/api/analytical/pendingOrders"
+      );
+      setOrders(response.data);
+      setError(null);
+    } catch (error) {
+      setError(
+        `Error fetching all orders: ${error.message}. Please try again.`
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const columns = [
+    { field: "seller_id", headerName: "Seller ID", flex: 1 },
     { field: "order_id", headerName: "Order ID", flex: 1 },
-    { field: "buyer_id", headerName: "Buyer ID", flex: 1 },
     { field: "item_id", headerName: "Item ID", flex: 1 },
+    { field: "buyer_id", headerName: "Buyer ID", flex: 1 },
     { field: "buyer_username", headerName: "Buyer Username", flex: 1 },
     { field: "buyer_email", headerName: "Buyer Email", flex: 1 },
     { field: "address_line1", headerName: "Address Line 1", flex: 1 },
@@ -47,9 +66,24 @@ const PendingOrder = () => {
           title="Get Pending Order"
           subtitle="write some thing here ..."
         />
-        <Button variant="contained" color="primary" onClick={handleSubmit}>
-          Get Orders
-        </Button>
+        <Box display="flex" justifyContent="space-between" alignItems="center">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleSubmit}
+            disabled={loading}
+          >
+            {loading ? "Getting Orders..." : "Get Orders"}
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={handleShowAll}
+            disabled={loading}
+          >
+            {loading ? "Fetching All..." : "Show All"}
+          </Button>
+        </Box>
       </Box>
       <TextField
         label="Seller ID"
